@@ -9,7 +9,8 @@
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <h2 class="text-center">{{project.project_title}}</h2>
             <img src="{{project.project_image.url}}" class="img-thumbnail" alt="{{project.project_title}}">
-            <h3>{{project.project_description |striptags }}</h3>
+            <p>{{project.project_description |striptags }}</p>
+            <a href="{% url 'project' project.id %}"><button class="btn btn-danger">View project</button></a>
           </div>
         </div>
 

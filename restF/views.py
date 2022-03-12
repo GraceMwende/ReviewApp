@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Project,Profile
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 # Create your views here.
 def home(request):
@@ -17,3 +19,11 @@ def search_results(request):
   else:
     message="You haven't searched for any item"
     return render(request,'search.html',{'messages':message})
+
+def project(request,project_id):
+  try:
+    project = Project.objects.get(id=project_id)
+  except ObjectDoesNotExist:
+    raise Http404()
+  return render(request,'project.html',{'project':project})
+  redirect('/')
