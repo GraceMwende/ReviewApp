@@ -11,6 +11,12 @@ class Project(models.Model):
   def __str__(self):
     return self.project_title
 
+  def save_project(self):
+    self.save()
+
+  def delete_project(self):
+    self.delete()
+
 class Profile(models.Model):
   profile_image = models.ImageField(upload_to='profiles/',null=True)
   bio = models.TextField()
