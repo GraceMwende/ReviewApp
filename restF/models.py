@@ -17,6 +17,11 @@ class Project(models.Model):
   def delete_project(self):
     self.delete()
 
+  @classmethod
+  def display_projects(cls):
+    projects = cls.objects.all()
+    return projects
+
 class Profile(models.Model):
   profile_image = models.ImageField(upload_to='profiles/',null=True)
   bio = models.TextField()
@@ -26,3 +31,9 @@ class Profile(models.Model):
 
   def __str__(self):
     return self.contact_info
+
+  @classmethod
+  def filter_by_profile(cls,proj):
+    project_filter = cls.objects.filter(id=proj).first()
+    project_by_profile = cls.objects.filter(project = project_filter).all()
+    return project_by_profile
