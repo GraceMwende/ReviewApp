@@ -21,7 +21,8 @@ class Profile(models.Model):
   profile_image = models.ImageField(upload_to='profiles/',null=True)
   bio = models.TextField()
   project = models.ForeignKey(Project, on_delete=models.CASCADE)
-  contact_info = models.EmailField()
+  email = models.EmailField()
+  phone_number = models.CharField(max_length=10,blank=True)
 
   def __str__(self):
     return self.contact_info
