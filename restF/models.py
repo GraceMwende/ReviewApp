@@ -22,6 +22,11 @@ class Project(models.Model):
     projects = cls.objects.all()
     return projects
 
+  @classmethod
+  def search_by_title(cls,searchterm):
+    project = cls.objects.filter(project_title__icontains=searchterm)
+    return project
+
 class Profile(models.Model):
   profile_image = models.ImageField(upload_to='profiles/',null=True)
   bio = models.TextField()

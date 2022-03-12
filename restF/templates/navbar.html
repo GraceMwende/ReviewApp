@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://kit.fontawesome.com/cd8c47e466.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -36,10 +37,12 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" action="{% url 'search_results' %}">
+          <input class="form-control me-2" type="search" name="project" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search<i class="fa-solid fa-magnifying-glass"style="color:red;"></i></button>
         </form>
+
+        <!-- search form end -->
       </div>
     </div>
   </nav>
