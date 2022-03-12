@@ -2,4 +2,22 @@
   {% block content %}
     {{block.super}}
     <h2>Home file</h2>
+    <div class="container">
+    {% for project in projects %}
+        <div class="row">
+          <!-- display projects -->
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h2 class="text-center">{{project.project_title}}</h2>
+            <img src="{{project.project_image.url}}" class="img-thumbnail" alt="{{project.project_title}}">
+          </div>
+        </div>
+
+        {% empty %}
+        <div class="row">
+          <h2 class="text-center">There are no news items</h2>
+        </div>
+
+    {% endfor %}
+    </div>
+
   {% endblock %}
