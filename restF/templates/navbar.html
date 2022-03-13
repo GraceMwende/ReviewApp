@@ -41,7 +41,7 @@
           <li><a class="dropdown-item" href="{% url 'home' %}">Home</a></li>
           <li><a class="dropdown-item" href="/accounts/password/change">Change Password</a></li>
           <li><a class="dropdown-item" href="{% url 'new-project' %}">Submit site</a></li>
-          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          <li><a class="dropdown-item" href="/logout">Logout:{{user.username}}</a></li>
         </ul>
         {% else %}
         <li>
