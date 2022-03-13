@@ -1,11 +1,13 @@
 from django.db import models
 from tinymce.models import HTMLField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Project(models.Model):
   project_title = models.CharField(max_length=200)
   project_image = models.ImageField(upload_to='projects/',null=True)
   project_description = HTMLField()
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
   project_link = models.CharField(max_length=200)
 
   def __str__(self):

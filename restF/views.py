@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Project,Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
+from .forms import NewProjectForm
 
 # Create your views here.
 def home(request):
@@ -29,3 +30,19 @@ def project(request,project_id):
     raise Http404()
   return render(request,'project.html',{'project':project})
   redirect('/')
+
+@login_required(login_url='/accounts/login/')
+def new_project(request):
+  current_user = request.user
+  if request.method == 'POST':
+    form = NewProjectForm(request.POST, request.FILES)
+    if form.is_valid():
+      project = form.save(commit=False)
+      project.user = current_user
+      project.save()
+    
+    return redirect('home')
+
+  else:
+    form = NewProjectForm()
+  return render(request, 'new_project.html',{'form':form})

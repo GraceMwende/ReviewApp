@@ -10,8 +10,15 @@
     <h1 class="text-center">{{project.project_title}}</h1>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <p>{{project.project_description | striptags}}</p>
+  </div> -->
+
+  <div class="row">
+      {% autoescape on %}
+        {{project.project_description |safe}}
+      {% endautoescape %}
   </div>
+
   </div>
 {% endblock %}
