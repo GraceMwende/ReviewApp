@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .forms import NewProjectForm,UserForm,ProfileForm
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -48,6 +49,26 @@ def new_project(request):
   return render(request, 'new_project.html',{'form':form})
 
 def userpage(request):
+  if request.method == "POST":
+    user_form = UserForm(request.POST,instance=request.user)
+    profile_form = ProfileForm(request.POST,instance=request.user.profile)
+
+    if user_form.is_valid():
+      user_form.save() 
+      messages.success(request,('Your profile was successfully updated'))
+
+    elif profile_form.is_valid():
+      profile_form.save()
+      messages.success(request,('Your projects were successfully updated!'))
+
+    else:
+      messages.error(request,('Unable to complete the request'))
+
+    return redirect('userpage')
+    
   user_form = UserForm(instance=request.user)
   profile_form = ProfileForm(instance=request.user.profile)
+
   return render(request=request, template_name='profile/user.html',context={'user':request.user,'user_form':user_form,'profile_form':profile_form})
+
+  
