@@ -10,7 +10,9 @@ urlpatterns = [
   path('new/project',views.new_project, name='new-project'),
   path('user/',views.userpage,name='userpage'),
   path('api/projects/',views.ProjectList.as_view()),
-  path('api/profiles/',views.ProfileList.as_view())
+  path('api/profiles/',views.ProfileList.as_view()),
+  re_path('api/project/project-id/(?P<pk>[0-9]+)',views.ProjectDescription.as_view()),
+  re_path('api/profile/profile-id/(?P<pk>[0-9]+)',views.ProfileDescription.as_view())
 ]
 
 if settings.DEBUG:
