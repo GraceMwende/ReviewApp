@@ -130,6 +130,11 @@ class ProjectDescription(APIView):
     else:
       return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
+  def delete(self,request,pk,format=None):
+    project = self.get_project(pk)
+    project.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 class ProfileDescription(APIView):
   permission_classes = (IsAdminOrReadOnly,)
   def get_profile(self,pk):
