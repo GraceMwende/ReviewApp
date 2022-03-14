@@ -15,4 +15,4 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
   class Meta:
     model = Profile
-    fields = ('projects',)
+    fields = ('bio','profile_image','phone_number')

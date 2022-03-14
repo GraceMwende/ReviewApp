@@ -34,14 +34,14 @@ class Project(models.Model):
 class Profile(models.Model):
   profile_image = models.ImageField(upload_to='profiles/',null=True)
   bio = models.TextField()
-  # project = models.ForeignKey(Project, on_delete=models.CASCADE,default=1)
-  projects = models.ManyToManyField(Project)
-  email = models.EmailField()
+  project = models.ForeignKey(Project, on_delete=models.CASCADE,default=1)
+  # projects = models.ManyToManyField(Project)
+  # email = models.EmailField()
   phone_number = models.CharField(max_length=10,blank=True)
   user = models.OneToOneField(User, on_delete=models.CASCADE,default=2)
 
   def __str__(self):
-    return self.email 
+    return self.user.username 
 
   @receiver(post_save, sender=User)
   def create_user_profile(sender,instance,created,**kwargs):

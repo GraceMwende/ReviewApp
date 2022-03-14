@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'restF',
     'bootstrap5',
     'tinymce',
-     'crispy_forms',
+    'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
