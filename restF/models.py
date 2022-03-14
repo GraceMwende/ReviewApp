@@ -1,6 +1,8 @@
 from django.db import models
 from tinymce.models import HTMLField
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Project(models.Model):
@@ -32,12 +34,22 @@ class Project(models.Model):
 class Profile(models.Model):
   profile_image = models.ImageField(upload_to='profiles/',null=True)
   bio = models.TextField()
-  project = models.ForeignKey(Project, on_delete=models.CASCADE)
+  project = models.ForeignKey(Project, on_delete=models.CASCADE,default=1)
   email = models.EmailField()
   phone_number = models.CharField(max_length=10,blank=True)
+  user = models.OneToOneField(User, on_delete=models.CASCADE,default=2)
 
   def __str__(self):
-    return self.email
+    return self.email 
+
+  @receiver(post_save, sender=User)
+  def create_user_profile(sender,instance,created,**kwargs):
+    if created:
+      profile.objects.create(user=instance)
+
+  @receiver(post_save, sender=User)
+  def save_user_profile(sender,instance,**kwargs):
+    instance.profile
 
   @classmethod
   def filter_by_profile(cls,proj):

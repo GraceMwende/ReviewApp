@@ -41,12 +41,18 @@
           <li><a class="dropdown-item" href="{% url 'home' %}">Home</a></li>
           <li><a class="dropdown-item" href="/accounts/password/change">Change Password</a></li>
           <li><a class="dropdown-item" href="{% url 'new-project' %}">Submit site</a></li>
-          <li><a class="dropdown-item" href="/logout">Logout:{{user.username}}</a></li>
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
         </ul>
-        {% else %}
-        <li>
-          <a class="nav-item btn btn-default" href="/accounts/login">login</a>
+        <li class="nav-item">
+          <a class="btn btn-outline-primary nav-link" href="/user">{{user.username|title}}</a>
         </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link btn btn-default" href="/accounts/login">login</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-primary" href="/accounts/register/">Register</a>
+       </li>
         {% endif %}
       </div>
     </div>

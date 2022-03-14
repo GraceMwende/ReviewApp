@@ -3,7 +3,7 @@ from .models import Project,Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-from .forms import NewProjectForm
+from .forms import NewProjectForm,UserForm,ProfileForm
 
 # Create your views here.
 def home(request):
@@ -46,3 +46,8 @@ def new_project(request):
   else:
     form = NewProjectForm()
   return render(request, 'new_project.html',{'form':form})
+
+def userpage(request):
+  user_form = UserForm(instance=request.user)
+  profile_form = ProfileForm(instance=request.user.profile)
+  return render(request=request, template_name='profile/user.html',context={'user':request.user,'user_form':user_form,'profile_form':profile_form})
