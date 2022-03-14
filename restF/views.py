@@ -69,6 +69,9 @@ def userpage(request):
   user_form = UserForm(instance=request.user)
   profile_form = ProfileForm(instance=request.user.profile)
 
-  return render(request=request, template_name='profile/user.html',context={'user':request.user,'user_form':user_form,'profile_form':profile_form})
+  user = request.user
+  my_projects = Project.objects.filter(user=user)
+
+  return render(request=request, template_name='profile/user.html',context={'user':request.user,'user_form':user_form,'profile_form':profile_form,'my_projects':my_projects})
 
   
