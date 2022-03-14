@@ -121,6 +121,15 @@ class ProjectDescription(APIView):
     serializers = ProjectSerializer(project)
     return Response(serializers.data)
 
+  def put(self,request,pk,format=None):
+    project = self.get_project(pk)
+    serializers = ProjectSerializer(project,request.data)
+    if serializers.is_valid():
+      serializers.save()
+      return Response(serializers.data)
+    else:
+      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class ProfileDescription(APIView):
   permission_classes = (IsAdminOrReadOnly,)
   def get_profile(self,pk):
@@ -133,3 +142,12 @@ class ProfileDescription(APIView):
     profile = self.get_profile(pk)
     serializers = ProfileSerializer(profile)
     return Response(serializers.data)
+
+  def put(self,request,pk,format=None):
+    profile = self.get_profile(pk)
+    serializers = ProfileSerializer(profile,request.data)
+    if serializers.is_valid():
+      serializers.save()
+      return Response(serializers.data)
+    else:
+      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
