@@ -5,6 +5,10 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .forms import NewProjectForm,UserForm,ProfileForm
 from django.contrib import messages
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import Profile,Project
+from .serializer import ProjectSerializer,ProfileSerializer
 
 # Create your views here.
 def home(request):
@@ -51,7 +55,7 @@ def new_project(request):
 def userpage(request):
   if request.method == "POST":
     user_form = UserForm(request.POST,instance=request.user)
-    profile_form = ProfileForm(request.POST,instance=request.user.profile)
+    profile_form = ProfileForm(request.POST, request.FILES,instance=request.user.profile)
 
     if user_form.is_valid():
       user_form.save() 
@@ -59,7 +63,7 @@ def userpage(request):
 
     elif profile_form.is_valid():
       profile_form.save()
-      messages.success(request,('Your projects were successfully updated!'))
+      messages.success(request,('Your credentials were successfully updated!'))
 
     else:
       messages.error(request,('Unable to complete the request'))
@@ -73,5 +77,17 @@ def userpage(request):
   my_projects = Project.objects.filter(user=user)
 
   return render(request=request, template_name='profile/user.html',context={'user':request.user,'user_form':user_form,'profile_form':profile_form,'my_projects':my_projects})
+
+class ProjectList(APIView):
+  def get(self,request,format=None):
+    all_projects = Project.objects.all()
+    serializers = ProjectSerializer(all_projects, many=True)
+    return Response(serializers.data)
+
+class ProfileList(APIView):
+  def get(self,request,format=None):
+    all_profiles = Profile.objects.all()
+    serializers = ProfileSerializer(all_profiles, many=True)
+    return Response(serializers.data)
 
   
