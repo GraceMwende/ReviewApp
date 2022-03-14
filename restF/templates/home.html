@@ -3,6 +3,7 @@
     {{block.super}}
     <div class="container">
     {% for project in projects %}
+    {% if project.project_image %}
         <div class="row">
           <!-- display projects -->
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -12,7 +13,7 @@
             <a href="{% url 'project' project.id %}"><button class="btn btn-danger">View project</button></a>
           </div>
         </div>
-
+    {% endif %}
         {% empty %}
         <div class="row">
           <h2 class="text-center">There are no projects yet</h2>
