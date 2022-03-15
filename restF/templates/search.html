@@ -3,17 +3,21 @@
 <div class="container">
     <div class="row">
       {% if projects %}
-        <h3>Found {{projects|length}} of searched term {{messages}}</h3>
+        <h3 class="text-center">Found {{projects|length}} of searched term {{messages}}</h3>
       {% else %}
-        <h3>Found 0 projects for the search term //{{messages}} </h3>
+        <h3 class="text-center">Found 0 projects for the search term //{{messages}} </h3>
       {% endif %}
     </div>
 
-    <div class="row">
+    <div class="container d-flex flex-wrap">
       {% for project in projects %}
-      <div class="col-sm-6 col-md-3">
-          <h1>{{project.project_title}}</h1>
-          <img src="{{project.project_image.url}}" class="img-thumbnail" alt="{{project.project_title}}">
+      <div class="col-4">
+          <div class="card mx-2 my-2">
+            <img src="{{project.project_image.url}}" class="img-fluid" alt="{{project.project_title}}">
+         <div class="card-body">
+          <h1 class="card-title">{{project.project_title}}</h1>
+         </div>
+          </div>
       </div>
       {% endfor %}
     </div>
