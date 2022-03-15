@@ -10,7 +10,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">Awards and Ratings</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Awards & Rate</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,14 +19,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
         </ul>
 
         <form class="d-flex" action="{% url 'search_results' %}">
-          <input class="form-control me-2" type="search" name="project" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input class="form-control me-2" type="search" name="project" placeholder="Search Projects" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Submit</button>
         </form>
 
         <!-- search form end -->
@@ -38,14 +35,16 @@
           Account
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="{% url 'home' %}">Home</a></li>
-          <li><a class="dropdown-item" href="/accounts/password/change">Change Password</a></li>
-          <li><a class="dropdown-item" href="{% url 'new-project' %}">Submit site</a></li>
-          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          <li><a class="dropdown-item" href="{% url 'home' %}"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+          <li><a class="dropdown-item" href="/accounts/password/change"><i class="fa-solid fa-key"></i> Change Password</a></li>
+          <li><a class="dropdown-item" href="{% url 'new-project' %}"><i class="fa-solid fa-circle-plus"></i> Submit site</a></li>
+          <li><a class="dropdown-item" href="/user"><i class="fa-solid fa-gear"></i>
+            My profile</a></li>
+          <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
         </ul>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="btn btn-outline-primary nav-link" href="/user">{{user.username|title}}</a>
-        </li>
+        </li> -->
         {% else %}
         <li class="nav-item">
           <a class="nav-link btn btn-default" href="/accounts/login">login</a>
