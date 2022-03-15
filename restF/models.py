@@ -57,3 +57,24 @@ class Profile(models.Model):
     project_filter = cls.objects.filter(id=proj).first()
     project_by_profile = cls.objects.filter(project = project_filter).all()
     return project_by_profile
+
+# Rate_CHOICES = (
+#     ('1','1'),
+#     ('2', '2'),
+#     ('3','3'),
+#     ('4','4'),
+#     ('5','5'),
+#     ('6','6'),
+#     ('7','7'),
+#     ('8','8'),
+#     ('9','9'),
+#     ('10','10'),
+# )
+
+class Review(models.Model):
+  project = models.ForeignKey(Project, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  rating = models.FloatField(default=0)
+
+  def __str__(self):
+    return self.user.username

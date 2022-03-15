@@ -36,10 +36,10 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" href="{% url 'home' %}"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
-          <li><a class="dropdown-item" href="/accounts/password/change"><i class="fa-solid fa-key"></i> Change Password</a></li>
           <li><a class="dropdown-item" href="{% url 'new-project' %}"><i class="fa-solid fa-circle-plus"></i> Submit site</a></li>
           <li><a class="dropdown-item" href="/user"><i class="fa-solid fa-gear"></i>
             My profile</a></li>
+            <li><a class="dropdown-item" href="/accounts/password/change"><i class="fa-solid fa-key"></i> Change Password</a></li>
           <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
         </ul>
         <!-- <li class="nav-item">
@@ -47,10 +47,10 @@
         </li> -->
         {% else %}
         <li class="nav-item">
-          <a class="nav-link btn btn-default" href="/accounts/login">login</a>
+          <a class="nav-link btn btn-outline-primary" href="/accounts/login">login</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-outline-primary" href="/accounts/register/">Register</a>
+          <a class="nav-link btn btn-outline-primary" href="/accounts/register/">Register</a>
        </li>
         {% endif %}
       </div>

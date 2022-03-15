@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
-from .models import Project,Profile
+from .models import Project,Profile,Review
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
+from django.http import Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .forms import NewProjectForm,UserForm,ProfileForm
+from .forms import NewProjectForm,UserForm,ProfileForm,ReviewForm
 from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -29,14 +29,16 @@ def search_results(request):
     message="You haven't searched for any item"
     return render(request,'search.html',{'messages':message})
     
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def project(request,project_id):
   try:
-    project = Project.objects.get(id=project_id)
+    project = Project.objects.get(id=project_id) # select from project where id=project_id
+    reviews = Review.objects.filter(project = project_id)
+
   except ObjectDoesNotExist:
     raise Http404()
-  return render(request,'project.html',{'project':project})
-  redirect('/')
+
+  return render(request,'project.html',{'project':project,'reviews':reviews})
 
 @login_required(login_url='/accounts/login/')
 def new_project(request):
@@ -79,6 +81,29 @@ def userpage(request):
   my_projects = Project.objects.filter(user=user)
 
   return render(request=request, template_name='profile/user.html',context={'user':request.user,'user_form':user_form,'profile_form':profile_form,'my_projects':my_projects})
+
+
+def add_review(request,id):
+  if request.user.is_authenticated:
+    project = Project.objects.get(id=id)
+
+    if request.method == "POST":
+      form = ReviewForm(request.POST or None)
+      if form.is_valid():
+        data = form.save(commit=False)
+        data.rating = request.POST['rating'] #comments same
+        data.user = request.user
+        data.project = project
+        data.save()
+        return redirect("project",id)
+
+    else:
+      form = ReviewForm()
+    return render(request, 'project.html',{'form':form})
+
+  else:
+    return redirect('/accounts/login')
+
 
 class ProjectList(APIView):
   permission_classes = (IsAdminOrReadOnly,)
