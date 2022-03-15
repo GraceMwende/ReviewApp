@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
   {% block content %}
     {{block.super}}
-    <div class="container">
-    {% for project in projects %}
-    {% if project.project_image %}
-        <div class="row">
+    <div class="container d-flex flex-wrap">
+      {% for project in projects %}
+       {% if project.project_image %}
           <!-- display projects -->
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h2 class="text-center">{{project.project_title}}</h2>
-            <img src="{{project.project_image.url}}" class="img-thumbnail" alt="{{project.project_title}}">
-            <p>{{project.project_description |striptags }}</p>
-            <a href="{% url 'project' project.id %}"><button class="btn btn-danger">View project</button></a>
-          </div>
+          <div class="col-4">
+             <div class="card my-3 mx-3">
+              <img src="{{project.project_image.url}}" class="img-thumbnail" alt="{{project.project_title}}">
+              <div class="card-body">
+                <h2 class="card-title">{{project.project_title}}</h2>
+                <p class="card-text">{{project.project_description |striptags }}</p>
+                <a href="{% url 'project' project.id %}"><button class="btn btn-dark">View project</button></a>  
+              </div>
         </div>
-    {% endif %}
+             </div>
+       {% endif %}
         {% empty %}
         <div class="row">
-          <h2 class="text-center">There are no projects yet</h2>
+              <h2 class="text-center">There are no projects yet</h2>
         </div>
 
     {% endfor %}
