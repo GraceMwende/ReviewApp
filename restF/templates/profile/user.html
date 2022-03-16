@@ -37,22 +37,27 @@
           </div>
         </div>
       </div>
+      <hr>
 
-      <div class="row">
-        <p>{{user.profile.bio}}</p>
-        {% if img %}
-        <img src="{{user.profile.profile_image.url}}" class="rounded-circle" alt="img">
-        {% endif %}
+      <p>Bio:{{user.profile.bio}}</p>
+      <p>contact:{{user.profile.phone_number}}</p>
+      {% if img %}
+      <img src="{{user.profile.profile_image.url}}" class="rounded-circle" alt="img">
+      {% endif %}
+      <h5 class="d-inline">Edit bio</h5> <div class="col-6 my-auto text-end">
+        <button type="button" class="btn btn-success font-weight-bold" style="border-radius: 50%"
+          data-bs-toggle="modal" data-bs-target="#projectModal">+</button>
+      </div>
+
+      <div class="row pb-4">
+        <div class="card p-4 my-2">
+         </div>
       </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-9 pb-4">
       <div class="row">
         <div class="col-6 my-auto">
           <h2 class="font-weight-bold pt-4">My projects</h2>
-        </div>
-        <div class="col-6 my-auto text-end">
-          <button type="button" class="btn btn-success font-weight-bold" style="border-radius: 50%"
-            data-bs-toggle="modal" data-bs-target="#projectModal">+</button>
         </div>
       </div>
       <br>
@@ -61,7 +66,7 @@
         {% if 'projects ' %}
         {% for p in my_projects %}
         <div class="col-sm-12 col-md-6 col-lg-4 pb-4">
-          <div class="h-100">
+          <div class="h-100 my-1">
             <img src="{{p.project_image.url}}" class="card-img-top" alt="{{p.project_title}}"
               style="width: auto; height: 225px; object-fit: scale-down;">
             <div class="card-body">
