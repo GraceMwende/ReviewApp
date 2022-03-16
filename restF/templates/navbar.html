@@ -23,16 +23,16 @@
 
         <form class="d-flex" action="{% url 'search_results' %}">
           <input class="form-control me-2" type="search" name="project" placeholder="Search Projects" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Submit</button>
+          <button class="btn btn-outline-secondary" type="submit">Submit</button>
         </form>
 
         <!-- search form end -->
       </div>
       <div class="dropdown mx-5">
         {% if user.is_authenticated %}
-        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
           data-bs-toggle="dropdown" aria-expanded="false">
-          Account
+          <i class="fa-solid fa-user"></i> Account
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" href="{% url 'home' %}"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
