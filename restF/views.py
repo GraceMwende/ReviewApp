@@ -11,6 +11,7 @@ from .models import Profile,Project
 from .serializer import ProjectSerializer,ProfileSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
+from django.db.models import Avg
 
 # Create your views here.
 def home(request):
@@ -34,6 +35,8 @@ def project(request,project_id):
   try:
     project = Project.objects.get(id=project_id) # select from project where id=project_id
     reviews = Review.objects.filter(project = project_id)
+    # reviews_avg = (Project.objects.filter(id=project_id)
+    #                                                   .annotate(avg_review=Avg('rates__rating')))
 
   except ObjectDoesNotExist:
     raise Http404()
