@@ -51,6 +51,7 @@ def new_project(request):
     if form.is_valid():
       project = form.save(commit=False)
       project.user = current_user
+      project.profile = Profile.objects.filter(user = current_user).first()
       project.save()
     
     return redirect('home')
@@ -60,6 +61,7 @@ def new_project(request):
   return render(request, 'new_project.html',{'form':form})
 
 def userpage(request):
+  Profile.objects.get_or_create(user=request.user)
   if request.method == "POST":
     user_form = UserForm(request.POST,instance=request.user)
     profile_form = ProfileForm(request.POST, request.FILES,instance=request.user.profile)

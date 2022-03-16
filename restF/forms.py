@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class NewProjectForm(forms.ModelForm):
   class Meta:
     model = Project
-    exclude = ['user']
+    exclude = ['user','profile']
 
 class UserForm(forms.ModelForm):
   class Meta:
