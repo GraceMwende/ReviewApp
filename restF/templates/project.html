@@ -16,6 +16,7 @@
               <p class="card-text">{% autoescape on %}
                 {{project.project_description |safe}}
               {% endautoescape %}</p>
+              <a href="{{project.project_link}}" target="blank"><button class="btn btn-dark">View full project</button></a>
         </div>
          </div>
       </div>
