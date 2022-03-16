@@ -11,7 +11,6 @@
               <div class="card-body">
                 <h2 class="card-title">{{project.project_title}}</h2>
                 <p class="card-text">{{project.project_description |striptags }}</p>
-                <p>posted by {{project.user.username}}</p>
                 <a href="{% url 'project' project.id %}"><button class="btn btn-dark">View project</button></a>  
               </div>
         </div>

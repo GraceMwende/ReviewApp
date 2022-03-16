@@ -39,8 +39,8 @@
       </div>
       <hr>
 
-      <p>Bio:{{user.profile.bio}}</p>
-      <p>contact:{{user.profile.phone_number}}</p>
+      <p><b>Bio</b>:{{user.profile.bio}}</p>
+      <p><b>contact</b>:{{user.profile.phone_number}}</p>
       {% if img %}
       <img src="{{user.profile.profile_image.url}}" class="rounded-circle" alt="img">
       {% endif %}
@@ -63,7 +63,6 @@
       <br>
 
       <div class="row">
-        {% if 'projects ' %}
         {% for p in my_projects %}
         <div class="col-sm-12 col-md-6 col-lg-4 pb-4">
           <div class="h-100 my-1">
@@ -76,10 +75,11 @@
             </div>
           </div>
         </div>
+        {% empty %}
+        <div class="row">
+              <h3 class="text-center">You have not added any projects yet</h3>
+        </div>
         {% endfor %}
-        {% else %}
-        <p>No projects to show</p>
-            {% endif %}
       </div>
     </div>
   </div>

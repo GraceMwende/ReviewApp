@@ -7,11 +7,11 @@ from django.db.models.signals import post_save
 
 class Profile(models.Model):
   profile_image = models.ImageField(upload_to='profiles/',null=True)
-  bio = models.TextField()
+  bio = models.TextField(default='test')
   # project = models.ForeignKey(Project, on_delete=models.CASCADE)
   # projects = models.ManyToManyField(Project)
   # email = models.EmailField()
-  phone_number = models.CharField(max_length=10,blank=True)
+  phone_number = models.CharField(max_length=10,blank=True,default='0711287999')
   user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
 
   def __str__(self):
